@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Investify</title>
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}" />
+    <style>
+      body {
+        background-color: #212529; /* Dark background */
+        color: #f8f9fa; /* Light text color for better visibility */
+        font-family: Arial, sans-serif; /* Default font */
+        overflow: hidden; /* Prevent scrollbars during animation */
+      }
+
+      .card {
+        width: 400px;
+        margin: auto;
+        margin-top: 100px;
+        border-radius: 15px; /* Rounded corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow effect */
+        background: linear-gradient(
+          135deg,
+          #ff6f61,
+          #6a5acd
+        ); /* Flashy gradient for card */
+        color: #fff; /* Text color inside the card */
+        animation: slide-in 0.5s ease forwards; /* Animation on card appearance */
+      }
+
+      @keyframes slide-in {
+        from {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      h3 {
+        margin-bottom: 20px; /* Space below headings */
+        color: #ffc107; /* Gold color for headings */
+        animation: fade-in 0.5s ease forwards; /* Animation for heading */
+      }
+
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .form-control {
+        border-radius: 10px; /* Rounded input fields */
+        border: none; /* Remove default border */
+        padding: 10px; /* Padding for inputs */
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.1
+        ); /* Slightly transparent background */
+        color: #f8f9fa; /* Input text color */
+        z-index: 1; /* Ensure inputs are above the outline */
+      }
+
+      .form-control:focus {
+        outline: none; /* Remove focus outline */
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.2
+        ); /* Change background on focus */
+      }
+
+      .btn {
+        border-radius: 10px; /* Rounded button */
+        background-color: #007bff; /* Bootstrap primary color */
+        color: white; /* Button text color */
+        transition: transform 0.3s ease; /* Button hover effect */
+      }
+
+      .btn:hover {
+        transform: scale(1.05); /* Slightly enlarge button on hover */
+        background-color: #0056b3; /* Darker shade on hover */
+      }
+
+      .alert {
+        border-radius: 10px; /* Rounded alert box */
+        color: black; /* Black text for alerts */
+        background-color: #ffeb3b; /* Alert background color */
+      }
+
+      .icon {
+        font-size: 24px; /* Icon size */
+        color: #ffc107; /* Gold color for icons */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card shadow">
+        <div class="card-body">
+          <h3 class="text-center">
+            <i class="fas fa-sign-in-alt icon"></i> Investify Login
+          </h3>
+
+          {% if messages %} {% for message in messages %}
+          <div
+            class="alert alert-{{ message.tags }} alert-dismissible fade show"
+            role="alert"
+          >
+            <i class="fas fa-exclamation-circle icon"></i> {{ message }}
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %} {% endif %}
+
+          <form id="loginForm" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="loginUsername"
+                ><i class="fas fa-user icon"></i> Username</label
+              >
+              <input
+                type="text"
+                name="username"
+                class="form-control"
+                id="loginUsername"
+                placeholder="Enter your username"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="loginPassword"
+                ><i class="fas fa-lock icon"></i> Password</label
+              >
+              <input
+                type="password"
+                name="password"
+                class="form-control"
+                id="loginPassword"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+          </form>
+          <div class="text-center mt-3">
+            <a
+              href="{% url 'register' %}"
+              class="btn btn-link"
+              style="color: #ffc107"
+              >Don't have an account? Register</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

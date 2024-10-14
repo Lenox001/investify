@@ -1,0 +1,152 @@
+{% extends "core/base.html" %} {% block content %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4">My Investments</h1>
+  <div class="row">
+    {% for investment in investments %}
+    <div class="col-md-6 mb-4">
+      <div
+        class="card text-light bg-gradient-danger rounded-custom colorful-outline"
+      >
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="bi bi-currency-exchange"></i> Investment Amount: Ksh {{
+            investment.amount }}
+          </h5>
+          <p class="card-text">
+            <i class="bi bi-calendar"></i> Maturity Date: {{
+            investment.maturity_date }}
+          </p>
+
+          <!-- Progress Bar -->
+          <div class="progress">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              style="width: {{ investment.progress }}%; background-color: {% if investment.progress < 100 %}green{% else %}red{% endif %};"
+            >
+              {{ investment.progress }}%
+            </div>
+          </div>
+
+          <!-- Trophy Icon for Progress -->
+          <p class="card-text mt-2">
+            <i
+              class="bi bi-trophy-fill"
+              style="color: {% if investment.progress < 100 %}gold{% else %}silver{% endif %};"
+            ></i>
+          </p>
+
+          <!-- Always Show Balance -->
+          <div class="mt-3">
+            <p class="card-text">
+              <i class="bi bi-wallet2" style="color: #ffc107"></i> Available
+              Balance: Ksh {{ investment.amount }}
+            </p>
+
+            <!-- Withdraw Button if Amount > 0 -->
+            {% if investment.amount > 0 %}
+            <a
+              href="{% url 'withdraw' investment.id %}"
+              class="btn btn-warning"
+            >
+              <i class="bi bi-arrow-right-circle-fill"></i> Withdraw
+            </a>
+            {% else %}
+            <!-- Show Icon when Amount is Zero -->
+            <span class="text-muted"
+              ><i class="bi bi-x-circle"></i> No funds available for
+              withdrawal.</span
+            >
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+      <p class="text-center">
+        <i class="bi bi-info-circle"></i> No investments found.
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .card {
+    border-radius: 15px;
+    position: relative;
+    margin: 20px 0; /* Space between cards */
+  }
+
+  .bg-gradient-danger {
+    background: linear-gradient(135deg, #dc3545, #f50e3d);
+  }
+
+  .colorful-outline {
+    position: relative;
+  }
+
+  .colorful-outline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent; /* Invisible border initially */
+    border-radius: 15px; /* Match card border radius */
+    transition: border-color 0.4s ease; /* Smooth transition */
+    z-index: 0; /* Place behind the input */
+  }
+
+  .colorful-outline:hover::before,
+  .colorful-outline:focus-within::before {
+    border-color: #ff6b6b; /* Change to red on hover */
+    animation: pulse 1.5s infinite alternate; /* Pulse animation */
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      border-color: #ff6b6b; /* Color at the start */
+    }
+    50% {
+      transform: scale(1.05); /* Slightly enlarge */
+      border-color: #6bc5fa; /* Color at halfway */
+    }
+    100% {
+      transform: scale(1); /* Reset size */
+      border-color: #ff6b6b; /* Color at the end */
+    }
+  }
+
+  .progress {
+    height: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    transition: width 0.4s ease;
+  }
+
+  /* Animation for the card titles and icons */
+  .card-title,
+  .card-text {
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+{% endblock %}

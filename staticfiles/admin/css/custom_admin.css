@@ -1,0 +1,15 @@
+/* custom_admin.css */
+body {
+    background-color: #d43e3e; /* Light gray background */
+}
+
+header {
+    background-color: #333; /* Dark background for the header */
+    color: #2ca14f; /* White text in header */
+}
+
+.main {
+    background-color: #fff; /* White background for the main content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Light shadow */
+}

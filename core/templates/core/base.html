@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Investify{% endblock %}</title>
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}" />
+    {% block extra_css %}{% endblock %}
+    <style>
+      .nav-link {
+        margin-left: 20px; /* Add space between icons */
+        transition: transform 0.2s; /* Smooth transition for hover effect */
+        display: flex; /* Use flex to align icons and text */
+        align-items: center; /* Center icons and text vertically */
+      }
+      .nav-link:hover {
+        transform: scale(1.1); /* Scale slightly on hover */
+      }
+      .nav-link i {
+        margin-right: 5px; /* Space between icon and text */
+        font-size: 20px; /* Adjust icon size */
+      }
+
+      /* Animation styles */
+      @keyframes slideIn {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .navbar {
+        transition: width 0.3s ease;
+      }
+
+      /* Footer styles */
+      footer {
+        background-color: #121212; /* Match the body background color */
+        color: #fff;
+        padding: 40px 20px; /* Increased padding for space from corners */
+        position: relative;
+        bottom: 0;
+        display: flex;
+        justify-content: space-between; /* Space out child elements */
+        align-items: center; /* Center align items vertically */
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+      }
+
+      .social-icons {
+        display: flex; /* Flexbox for spacing */
+        gap: 20px; /* Space between icons */
+      }
+
+      .social-icons a {
+        color: #fff; /* Icon color */
+        font-size: 24px; /* Icon size */
+        transition: color 0.3s; /* Smooth color transition */
+      }
+
+      .social-icons a:hover {
+        color: #f39c12; /* Change color on hover */
+      }
+
+      @media (max-width: 768px) {
+        footer {
+          flex-direction: column; /* Stack items on small screens */
+          align-items: center; /* Center align items */
+          text-align: center; /* Center text */
+        }
+
+        .social-icons {
+          margin-top: 10px; /* Space between copyright and icons */
+        }
+
+        /* Navbar styles for mobile */
+        .navbar-nav {
+          flex-direction: column; /* Stack items in a column */
+          width: 100%; /* Full width */
+          text-align: center; /* Center text for mobile */
+        }
+      }
+
+      /* Hamburger animation */
+      .navbar-toggler {
+        transition: all 0.3s;
+      }
+      .navbar-toggler.collapsed {
+        transform: rotate(0deg);
+      }
+      .navbar-toggler:not(.collapsed) {
+        transform: rotate(180deg);
+      }
+    </style>
+  </head>
+  <body class="bg-dark text-light">
+    {% block navbar %}
+    <nav
+      class="navbar navbar-expand-lg navbar-dark"
+      style="background-color: #444"
+    >
+      <a class="navbar-brand slide-in" href="{% url 'index'%}">
+        <img
+          src="{% static 'core/images/logo.png' %}"
+          alt="Investify Logo"
+          style="height: 40px; margin-right: 10px"
+        />
+        <!-- Add your logo -->
+        Investify
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}" title="Home">
+              <i class="fas fa-home"></i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'invest'%}" title="Invest">
+              <i class="fas fa-money-bill-wave"></i> Invest
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact'%}" title="Contact">
+              <i class="fas fa-envelope"></i> Contact
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'user' %}" title="User Account">
+              <i class="fas fa-user-circle"></i> User
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              More
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right"
+              aria-labelledby="navbarDropdown"
+            >
+              <a
+                class="dropdown-item"
+                href="{% url 'investment_overview' %}"
+                title="Investment Overview"
+              >
+                <i class="fas fa-chart-line"></i> Investment Overview
+              </a>
+              <a class="dropdown-item" href="{% url 'logout' %}" title="Logout">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+              <!-- Add more dropdown items here -->
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    {% endblock %} {% block content %} {% endblock %}
+
+    <!-- Footer Section -->
+    <footer class="bg-dark">
+      <div class="copyright">
+        <p>&copy; 2024 Investify. All rights reserved.</p>
+      </div>
+      <div class="social-icons">
+        <a href="https://www.facebook.com" target="_blank" title="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.twitter.com" target="_blank" title="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com" target="_blank" title="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </footer>
+
+    <!-- Bootstrap and jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{% static 'core/js/scripts.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

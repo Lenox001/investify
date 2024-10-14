@@ -1,0 +1,147 @@
+{% extends 'core/base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'core/css/home.css' %}" />
+
+<div class="container my-5">
+  <!-- Message Display Block -->
+  {% if messages %} {% for message in messages %}
+  <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+  {% endfor %} {% endif %}
+
+  <header class="text-center mb-5">
+    <h1 class="color-change text-info">Welcome to Investify</h1>
+    <p class="lead animate__animated animate__fadeInUp">
+      Your partner in smart investments
+    </p>
+  </header>
+
+  <section class="row">
+    <div class="col-md-4 text-center mb-4">
+      <div
+        class="card bg-dark text-light animate__animated animate__zoomIn"
+        style="transition: transform 0.2s"
+      >
+        <div class="card-body">
+          <h5 class="card-title jump" data-index="0">Investment Plans</h5>
+          <p class="card-text">
+            Explore our tailored investment plans designed for every investor.
+          </p>
+          <a href="{% url 'invest' %}" class="btn btn-primary"
+            ><i class="fas fa-chart-line"></i> Learn More</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 text-center mb-4">
+      <div
+        class="card bg-dark text-light animate__animated animate__zoomIn"
+        style="transition: transform 0.2s"
+      >
+        <div class="card-body">
+          <h5 class="card-title jump" data-index="1">Market Insights</h5>
+          <p class="card-text">
+            Stay updated with the latest market trends and insights.
+          </p>
+          <a
+            href="https://www.get-invest.eu/resources/market-insights/"
+            class="btn btn-primary"
+            ><i class="fas fa-binoculars"></i> View Insights</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 text-center mb-4">
+      <div
+        class="card bg-dark text-light animate__animated animate__zoomIn"
+        style="transition: transform 0.2s"
+      >
+        <div class="card-body">
+          <h5 class="card-title jump" data-index="2">Customer Support</h5>
+          <p class="card-text">Our support team is here to assist you 24/7.</p>
+          <a href="{% url 'contact' %}" class="btn btn-primary"
+            ><i class="fas fa-headset"></i> Contact Us</a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-center my-5">
+    <h2 class="display-5 animate__animated animate__fadeIn">Why Choose Us?</h2>
+    <p class="lead animate__animated animate__fadeIn">
+      We provide unparalleled service, expert advice, and innovative solutions
+      to help you succeed.
+    </p>
+    <div class="row justify-content-center">
+      <div class="col-md-3 text-center">
+        <i
+          class="fas fa-shield-alt fa-3x mb-3 animate__animated animate__bounceIn"
+        ></i>
+        <h5>Security</h5>
+        <p>Your investments are safe with us.</p>
+      </div>
+      <div class="col-md-3 text-center">
+        <i
+          class="fas fa-users fa-3x mb-3 animate__animated animate__bounceIn"
+        ></i>
+        <h5>Community</h5>
+        <p>Join a community of like-minded investors.</p>
+      </div>
+      <div class="col-md-3 text-center">
+        <i
+          class="fas fa-tools fa-3x mb-3 animate__animated animate__bounceIn"
+        ></i>
+        <h5>Tools</h5>
+        <p>Access powerful tools to maximize your returns.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  /* Color change effect for the welcome text */
+  .color-change {
+    display: inline-block;
+    animation: colorChange 3s infinite;
+  }
+
+  @keyframes colorChange {
+    0% {
+      color: #ff6b6b;
+    }
+    33% {
+      color: #6bff6b;
+    }
+    66% {
+      color: #6b6bff;
+    }
+    100% {
+      color: #ff6b6b;
+    }
+  }
+
+  /* Jumping effect for the links */
+  .jump {
+    display: inline-block;
+    animation: jump 3s ease-in-out infinite;
+  }
+
+  @keyframes jump {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+</style>
+
+<script>
+  const links = document.querySelectorAll(".jump");
+
+  // Jump animation for links
+  links.forEach((link) => {
+    link.classList.add("animate__animated", "animate__pulse");
+  });
+</script>
+{% endblock %}

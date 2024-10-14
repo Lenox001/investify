@@ -1,0 +1,142 @@
+{% extends "core/base.html" %} {% block content %}
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+  rel="stylesheet"
+/>
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Investment Packages</h1>
+  <div class="row justify-content-center">
+    <!-- Basic Package -->
+    <div class="col-md-3 mb-4">
+      <div
+        class="card text-light bg-gradient-primary rounded-custom animate__animated animate__pulse animate__infinite"
+      >
+        <div class="card-body d-flex align-items-center">
+          <i class="bi bi-piggy-bank display-4 me-3"></i>
+          <div>
+            <h5 class="card-title">Basic Package</h5>
+            <p class="card-text"><i class="bi bi-cash-stack"></i> Ksh 500</p>
+            <p class="card-text">
+              <strong>4% Returns Weekly</strong>
+            </p>
+            <a href="{% url 'basic_package' %}" class="btn btn-light mt-3">
+              <i class="bi bi-arrow-right-circle"></i> Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Classic Package -->
+    <div class="col-md-3 mb-4">
+      <div
+        class="card text-light bg-gradient-success rounded-custom animate__animated animate__pulse animate__infinite"
+      >
+        <div class="card-body d-flex align-items-center">
+          <i class="bi bi-award display-4 me-3"></i>
+          <div>
+            <h5 class="card-title">Classic Package</h5>
+            <p class="card-text"><i class="bi bi-cash-stack"></i> Ksh 1,000</p>
+            <p class="card-text">
+              <strong>8% Returns Weekly</strong>
+            </p>
+            <a href="{% url 'classic_package' %}" class="btn btn-light mt-3">
+              <i class="bi bi-arrow-right-circle"></i> Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Premium Package -->
+    <div class="col-md-3 mb-4">
+      <div
+        class="card text-light bg-gradient-warning rounded-custom animate__animated animate__pulse animate__infinite"
+      >
+        <div class="card-body d-flex align-items-center">
+          <i class="bi bi-gem display-4 me-3"></i>
+          <div>
+            <h5 class="card-title">Premium Package</h5>
+            <p class="card-text"><i class="bi bi-cash-stack"></i> Ksh 2,000</p>
+            <p class="card-text">
+              <strong>16% Returns Weekly</strong>
+            </p>
+            <a href="{% url 'premium_package' %}" class="btn btn-dark mt-3">
+              <i class="bi bi-arrow-right-circle"></i> Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Titanium Package -->
+    <div class="col-md-3 mb-4">
+      <div
+        class="card text-light bg-gradient-danger rounded-custom animate__animated animate__pulse animate__infinite"
+      >
+        <div class="card-body d-flex align-items-center">
+          <i class="bi bi-trophy display-4 me-3"></i>
+          <div>
+            <h5 class="card-title">Titanium Package</h5>
+            <p class="card-text"><i class="bi bi-cash-stack"></i> Ksh 5,000</p>
+            <p class="card-text">
+              <strong>32% Returns Weekly</strong>
+            </p>
+            <a href="{% url 'titanium_package' %}" class="btn btn-dark mt-3">
+              <i class="bi bi-arrow-right-circle"></i> Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add custom styles for animation, borders, and colors -->
+<style>
+  .card {
+    transition: transform 0.3s ease-in-out;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  /* Custom rounded shape */
+  .rounded-custom {
+    border-radius: 30px;
+  }
+
+  /* Color gradients for better appearance */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #007bff, #6f42c1);
+  }
+
+  .bg-gradient-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+  }
+
+  .bg-gradient-warning {
+    background: linear-gradient(135deg, #ffc107, #fd7e14);
+  }
+
+  .bg-gradient-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+  }
+
+  .btn-light {
+    color: black;
+  }
+
+  .me-3 {
+    margin-right: 1rem; /* Adjust the spacing between icon and text */
+  }
+
+  /* Bootstrap animation library */
+  @import url("https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css");
+</style>
+{% endblock %}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investify</title>
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+    <style>
+        body {
+            background-color: #212529; /* Dark background */
+            color: white; /* White text */
+            font-family: Arial, sans-serif; /* Set a default font */
+        }
+
+        .card {
+            width: 400px;
+            margin: auto;
+            margin-top: 100px;
+            border-radius: 15px 0 15px 0; /* Rounded corners (top left and bottom right) */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow effect */
+            background-color: #343a40; /* Darker card background */
+            position: relative; /* Position for pseudo-element */
+            overflow: hidden; /* Hide overflow for animations */
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff0077, #ff5e3a, #ff7b00, #b4d300, #00b6ff);
+            animation: rotate 10s linear infinite; /* Infinite rotation */
+            z-index: 0; /* Position behind the content */
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .card-body {
+            position: relative; /* Position relative for text and buttons */
+            z-index: 1; /* Ensure it appears above the animated background */
+        }
+
+        h3 {
+            margin-bottom: 20px; /* Space below the headings */
+        }
+
+        .form-control {
+            border-radius: 10px; /* Rounded input fields */
+            border: 2px solid transparent; /* Transparent border for animation */
+            transition: border-color 0.5s; /* Smooth transition for the border color */
+        }
+
+        .form-control:focus {
+            outline: none; /* Remove default outline */
+            animation: outline-animation 2s linear infinite alternate; /* Infinite animated outline */
+        }
+
+        @keyframes outline-animation {
+            0% {
+                border-color: #ff0077; /* Initial color */
+            }
+            25% {
+                border-color: #ff5e3a; /* Second color */
+            }
+            50% {
+                border-color: #ff7b00; /* Third color */
+            }
+            75% {
+                border-color: #b4d300; /* Fourth color */
+            }
+            100% {
+                border-color: #00b6ff; /* Final color */
+            }
+        }
+
+        .btn {
+            border-radius: 10px; /* Rounded button */
+        }
+
+        footer {
+            background-color: #121212; /* Match the body background color */
+            color: #fff;
+            padding: 40px 20px; /* Increased padding for space from corners */
+            text-align: center; /* Center text */
+            position: fixed; /* Fixed footer */
+            left: 0;
+            bottom: 0;
+            width: 100%; /* Full width */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container"> <!-- Added Bootstrap container -->
+        <div class="card shadow">
+            <div class="card-body text-danger">
+                <h3 class="text-center">Register</h3>
+                
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form id="registerForm" method="post" action="{% url 'register' %}"> <!-- Updated action URL -->
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="registerUsername"><i class="fas fa-user"></i> Username</label>
+                        <input type="text" name="username" class="form-control" id="registerUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" name="email" class="form-control" id="registerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" name="password1" class="form-control" id="registerPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword"><i class="fas fa-lock"></i> Confirm Password</label>
+                        <input type="password" name="password2" class="form-control" id="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100"><i class="fas fa-user-plus"></i> Register</button>
+                </form>
+                <div class="text-center mt-3">
+                    <a href="{% url 'login' %}" class="btn btn-link"><i class="fas fa-sign-in-alt"></i> Already have an account? Login</a> <!-- Updated link to login -->
+                </div>
+            </div>
+        </div>
+    </div> <!-- End of Bootstrap container -->
+
+    </footer>
+
+    <!-- Bootstrap and jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

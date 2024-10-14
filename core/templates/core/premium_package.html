@@ -1,0 +1,140 @@
+{% extends "core/base.html" %} {% block content %}
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+  rel="stylesheet"
+/>
+<link
+  href="https://cdn.jsdelivr.net/npm/animate.css/animate.min.css"
+  rel="stylesheet"
+/>
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Premium Package</h1>
+  <div class="row justify-content-center">
+    <!-- Premium Package -->
+    <div class="col-md-6 mb-4">
+      <div
+        class="card text-dark bg-gradient-warning rounded-custom animate__animated animate__pulse animate__infinite"
+      >
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-gem display-4 me-3"></i>
+            <div>
+              <h5 class="card-title">Premium Package</h5>
+              <p class="card-text"><i class="bi bi-cash-stack"></i> Ksh 2000</p>
+              <p class="card-text">
+                <strong>16% Returns Weekly</strong>
+              </p>
+            </div>
+          </div>
+
+          <form
+            class="mt-4"
+            id="investmentForm"
+            action="{% url 'lipa_na_mpesa_online' %}"
+            method="POST"
+          >
+            <div class="mb-3">
+              {% csrf_token %}
+              <label for="amount" class="form-label">Enter Amount</label>
+              <input
+                type="number"
+                class="form-control custom-input"
+                id="amount"
+                placeholder="Ksh 2000"
+                required
+                name="amount"
+              />
+            </div>
+
+            <!-- Phone Number Input for M-Pesa -->
+            <div class="mb-3">
+              <label for="mpesa" class="form-label">M-Pesa Phone Number</label>
+              <input
+                type="tel"
+                class="form-control custom-input"
+                id="mpesa"
+                placeholder="07XX XXX XXX"
+                required
+                name="phone"
+              />
+            </div>
+
+            <button type="submit" class="btn custom-button w-100">
+              <i class="bi bi-check-circle"></i> Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add custom styles for animation, borders, and colors -->
+<style>
+  .card {
+    transition: transform 0.3s ease-in-out;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  /* Custom rounded shape */
+  .rounded-custom {
+    border-radius: 30px;
+  }
+
+  /* Color gradients for better appearance */
+  .bg-gradient-warning {
+    background: linear-gradient(135deg, #ffc107, #ffca2c);
+  }
+
+  .btn.custom-button {
+    background-color: #ffc107; /* Change to your desired button color */
+    color: black;
+    transition: background-color 0.3s;
+  }
+
+  .btn.custom-button:hover {
+    background-color: #ffca2c; /* Change to your desired hover color */
+  }
+
+  .me-3 {
+    margin-right: 1rem; /* Adjust the spacing between icon and text */
+  }
+
+  /* Style for animated input fields */
+  .custom-input {
+    background-color: #f2f2f2; /* Grey background */
+    border: 2px solid transparent; /* Initial border color */
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Add border color when focused */
+  .custom-input:focus {
+    border-color: #ffc107; /* Change to your desired focus color */
+    animation: bounce 0.5s; /* Add bounce animation */
+  }
+
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+</style>
+
+{% endblock %}
