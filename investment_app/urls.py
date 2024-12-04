@@ -16,11 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf import settings#
+from core import views
+from django.conf.urls.static import static
 admin.site.site_title = "Investify site admin (DEV)"
 admin.site.site_header = "Investify administration"
 admin.site.index_title = "Site administration"
 
+
 urlpatterns = [
     path('myadmin/', admin.site.urls),
-    path('',include('core.urls'))
-]
+    path('',include('core.urls')),
+     path('admin-dashboard/', views.custom_admin_dashboard, name='admin_dashboard'),
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

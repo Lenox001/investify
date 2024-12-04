@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=6)bccvzugyoy)*al4r6@chp$+3#0(2m%#^&ryecdnlvkj&s6='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['lenoxx.pythonanywhere.com','127.0.0.1']
+ALLOWED_HOSTS = ['lenoxx.pythonanywhere.com','127.0.0.1','localhost']
 
 
 # Application definition
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'investment_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Correct path to your templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +68,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'investment_app.wsgi.application'
 
@@ -116,11 +117,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
+# Define the URL that will be used to access static files
 STATIC_URL = '/static/'
 
-# Define the STATIC_ROOT
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Change 'staticfiles' to your preferred directory name
+# Define where the static files should be collected when you run `python manage.py collectstatic`
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Define additional directories where static files can be found during development
+STATICFILES_DIRS = [BASE_DIR / "static"]  # This assumes your static files are inside a folder named 'static' in the project directory
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

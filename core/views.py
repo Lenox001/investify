@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django import forms
-from .models import ContactMessage, RecentActivity, Investment, Transaction  # Include Transaction model
+from .models import ContactMessage, RecentActivity, Investment, Transaction  
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from .forms import UserEditForm
@@ -16,6 +16,7 @@ import requests
 from django.db import IntegrityError
 from django.db.models import Sum
 from django.views.decorators.csrf import csrf_exempt
+
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100, label='Your Name', required=True)
@@ -272,3 +273,6 @@ def lipa_na_mpesa_online(request):
 
     return render(request, 'core/lipa_na_mpesa.html')
 
+def custom_admin_dashboard(request):
+    recent_activities = RecentActivity.objects.all()[:5]  # Get the 5 most recent activities
+    return render(request, 'admin/index.html', {'recent_activities': recent_activities})
