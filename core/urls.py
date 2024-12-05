@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import index, user, contact, invest, login_view, register_view, logout_view,edit_account,basic_package, classic_package, premium_package, titanium_package,investment_overview,lipa_na_mpesa_online
+from .views import index,withdraw,user, contact, invest, login_view, register_view, logout_view,edit_account,basic_package, classic_package, premium_package, titanium_package,investment_overview,lipa_na_mpesa_online
 
 urlpatterns = [
     path('', index, name='index'),
@@ -18,6 +18,7 @@ urlpatterns = [
     path('titanium-package/', titanium_package, name='titanium_package'),
     path('investments/', investment_overview, name='investment_overview'),
     path('lipa-na-mpesa/',lipa_na_mpesa_online, name='lipa_na_mpesa_online'),
+    path('withdraw/<int:investment_id>/', withdraw, name='withdraw'),
     
      
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

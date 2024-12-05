@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -190,16 +190,20 @@ def titanium_package(request):
 @login_required
 def investment_overview(request):
     if request.user.is_authenticated:
+        # Fetch investments for the logged-in user
         investments = Investment.objects.filter(user=request.user)
 
         # Calculate the user's total investment balance
         total_balance = investments.aggregate(balance=Sum('amount'))['balance'] or 0
 
+        # Pass investments and total balance to the template
         return render(request, 'core/investment_overview.html', {
             'investments': investments,
             'balance': total_balance
         })
-    return redirect('login')  # Redirect to login if user is not authenticated
+
+    # Redirect to login if the user is not authenticated
+    return redirect('login')# Redirect to login if user is not authenticated
 
 @login_required
 def lipa_na_mpesa_online(request):
@@ -276,3 +280,19 @@ def lipa_na_mpesa_online(request):
 def custom_admin_dashboard(request):
     recent_activities = RecentActivity.objects.all()[:5]  # Get the 5 most recent activities
     return render(request, 'admin/index.html', {'recent_activities': recent_activities})
+def withdraw(request, investment_id):
+    # Fetch the investment object or show a 404 error if not found
+    investment = get_object_or_404(Investment, id=investment_id)
+
+    if investment.amount <= 0:
+        # Prevent withdrawal if the amount is zero or less
+        messages.error(request, "No funds available for withdrawal.")
+        return redirect('investment_overview')  # Adjust to your overview page's URL name
+
+    # Perform withdrawal logic
+    investment.amount = 0  # Reset amount to zero after withdrawal
+    investment.save()
+
+    # Success message
+    messages.success(request, "Withdrawal successful!")
+    return redirect('investment_overview')  # Redirect back to overview
